@@ -1,13 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ImportShopApi.Models;
+using System.Text.Json.Serialization;
 
 namespace ImportShopCore.Models.Entities {
   public class Product : IIdentifiable {
     public int Id { get; set; }
 
-    [Required] 
-    [Range(0f, float.MaxValue)] 
-    public float Price { get; set; }
+    [Required] [Range(0f, float.MaxValue)] public float Price { get; set; }
 
     [Required]
     [MinLength(1)]
@@ -35,6 +33,6 @@ namespace ImportShopCore.Models.Entities {
     public string MediaUrl { get; set; }
 
     [Required] public int AccountId { get; set; }
-    public virtual Account Account { get; set; }
+    public Account Account { get; set; }
   }
 }

@@ -1,4 +1,4 @@
-﻿namespace ImportShopApi.Models {
+﻿namespace ImportShopCore.Models {
   public interface IIdentifiable {
     int Id { get; }
   }

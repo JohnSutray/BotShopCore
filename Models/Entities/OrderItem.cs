@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace ImportShopCore.Models.Entities {
-  public class CartItem : IIdentifiable {
+  public class OrderItem: IIdentifiable {
     public int Id { get; set; }
 
     [Required] public int ProductId { get; set; }
-    public virtual Product Product { get; set; }
+    public Product Product { get; set; }
 
-    [Required] public int ChatId { get; set; }
-    public virtual Chat Chat { get; set; }
+    [Required] public int OrderId { get; set; }
+    public Order Order { get; set; }
   }
 }

@@ -1,5 +1,4 @@
 ﻿using ImportShopCore.Extensions.Common;
-using ImportShopCore.Models.Account;
 using ImportShopCore.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,18 +11,14 @@ namespace ImportShopCore {
     public DbSet<Chat> Chats { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
     public DbSet<TelegramMessage> Messages { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 
     public ApplicationContext(IConfiguration configuration) => Configuration = configuration;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
       optionsBuilder.UseMySql(Configuration.GetDefaultConnectionString());
       base.OnConfiguring(optionsBuilder);
-    }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder) {
-      modelBuilder.Entity<Chat>().Property(chat => chat.Query).HasDefaultValue("menu");
-      
-      base.OnModelCreating(modelBuilder);
     }
   }
 }

@@ -3,6 +3,6 @@
 namespace ImportShopCore.Models {
   public class Category {
     public string Name { get; set; }
-    public IEnumerable<string> Types { get; set; }
+    public List<string> Types { get; set; }
   }
 }
