@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ImportShopCore.Enums {
+namespace BotShopCore.Enums {
   [JsonConverter(typeof(JsonStringEnumConverter))]
   public enum EDisplayType {
     Video,

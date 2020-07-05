@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace ImportShopCore.Models {
+namespace BotShopCore.Models {
   public class PaginationResult<TItem> {
     [Required] public List<TItem> Items { get; set; }
     [Required] public int Page { get; set; }

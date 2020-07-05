@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ImportShopCore.Models.Entities {
+namespace BotShopCore.Models.Entities {
   public class Account: IIdentifiable {
     public int Id { get; set; }
 

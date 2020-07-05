@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ImportShopCore.Models.Entities {
+namespace BotShopCore.Models.Entities {
   public class CartItem : IIdentifiable {
     public int Id { get; set; }
 

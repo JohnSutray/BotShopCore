@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ImportShopCore.Models.Entities {
+namespace BotShopCore.Models.Entities {
   public class Chat : IIdentifiable {
     [Required]
     [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -30,7 +30,7 @@ namespace ImportShopCore.Models.Entities {
     public int AccountId { get; set; }
     public Account Account { get; set; }
 
-    public ICollection<TelegramMessage> Messages { get; set; }
+    public ICollection<BotMessage> Messages { get; set; }
 
     public ICollection<CartItem> CartItems { get; set; }
   }

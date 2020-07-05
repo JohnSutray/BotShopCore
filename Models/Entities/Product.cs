@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace ImportShopCore.Models.Entities {
+namespace BotShopCore.Models.Entities {
   public class Product : IIdentifiable {
     public int Id { get; set; }
 

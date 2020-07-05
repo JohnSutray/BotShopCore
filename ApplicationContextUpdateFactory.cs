@@ -1,11 +1,12 @@
-﻿using ImportShopCore.Utils;
+﻿using BotShopCore.Utils;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace ImportShopCore {
+namespace BotShopCore {
   // ReSharper disable once UnusedType.Global
   public class ApplicationContextUpdateFactory : IDesignTimeDbContextFactory<ApplicationContext> {
-    public ApplicationContext CreateDbContext(string[] args) => new ApplicationContext(
-      ConfigurationUtils.CreateAppSettingsConfiguration()
-    );
+    public ApplicationContext CreateDbContext(string[] args) {
+      DotEnvUtils.InjectDotEnvVars();
+      return new ApplicationContext();
+    }
   }
 }

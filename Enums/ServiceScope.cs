@@ -1,4 +1,4 @@
-﻿namespace ImportShopCore.Enums {
+﻿namespace BotShopCore.Enums {
   public enum ServiceScope {
     Singleton,
     Transient,

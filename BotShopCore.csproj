@@ -2,10 +2,16 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>ImportShopCore</RootNamespace>
+        <RootNamespace>BotShopCore</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Bot Shop Core</Title>
+        <Authors>John Sutray</Authors>
+        <Description>Bot Shop Core Utilities</Description>
+        <PackageIconUrl>https://i.ibb.co/FzrYHyC/shop-bot.png</PackageIconUrl>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="DotNetEnv" Version="1.4.0" />
       <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
       <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
@@ -13,10 +19,4 @@
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
       <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.0" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Models\AccountLogin.cs" />
-      <Compile Remove="Models\PaginateResult.cs" />
-    </ItemGroup>
-
 </Project>

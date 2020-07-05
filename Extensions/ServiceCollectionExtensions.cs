@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using ImportShopCore.Attributes;
-using ImportShopCore.Enums;
+using BotShopCore.Attributes;
+using BotShopCore.Enums;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ImportShopCore.Extensions {
+namespace BotShopCore.Extensions {
   public static class ServiceCollectionExtensions {
     private static readonly IDictionary<Assembly, IDictionary<Type, ServiceScope>> ServicesCache =
       new Dictionary<Assembly, IDictionary<Type, ServiceScope>>();
@@ -14,9 +14,9 @@ namespace ImportShopCore.Extensions {
       this IServiceCollection serviceCollection,
       Assembly assembly
     ) {
-      if (ServicesCache.ContainsKey(assembly)) 
+      if (ServicesCache.ContainsKey(assembly))
         serviceCollection.AddServicesOfCachedAssembly(assembly);
-      else 
+      else
         serviceCollection.AddServicesOfNewAssembly(assembly);
 
       return serviceCollection;

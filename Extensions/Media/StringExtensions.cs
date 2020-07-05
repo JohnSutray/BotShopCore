@@ -1,8 +1,8 @@
 ﻿using System;
-using ImportShopCore.Enums;
+using BotShopCore.Enums;
 using Microsoft.AspNetCore.StaticFiles;
 
-namespace ImportShopCore.Extensions.Media {
+namespace BotShopCore.Extensions.Media {
   public static class StringExtensions {
     public static EDisplayType GetDisplayType(this string fileName) {
       var contentType = GetContentType(fileName);

@@ -5,23 +5,16 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace ImportShopCore.Models {
-  public class RepositoryService<TEntity> where TEntity : class, IIdentifiable {
-    protected RepositoryService(
-      ApplicationContext context,
-      Func<ApplicationContext, DbSet<TEntity>> setMapping
-    ) {
-      Context = context;
-      SetMapping = setMapping;
-    }
+namespace BotShopCore.Models {
+  public abstract class RepositoryService<TEntity> where TEntity : class, IIdentifiable {
+    protected RepositoryService(ApplicationContext context) => Context = context;
 
-    private ApplicationContext Context { get; }
-    private Func<ApplicationContext, DbSet<TEntity>> SetMapping { get; }
-    private DbSet<TEntity> Set => SetMapping(Context);
+    protected ApplicationContext Context { get; }
+    protected abstract DbSet<TEntity> Set { get; }
 
     protected async Task SaveChangesAsync() => await Context.SaveChangesAsync();
 
-    protected void SaveChanges() => Context.SaveChanges();
+    private void SaveChanges() => Context.SaveChanges();
 
     protected TEntity ById(int id) => Set.FirstOrDefault(e => e.Id == id);
 
@@ -149,6 +142,11 @@ namespace ImportShopCore.Models {
       SaveChanges();
     }
 
+    protected void RemoveByPattern(Expression<Func<TEntity, bool>> pattern) {
+      Set.Remove(Set.First(pattern));
+      SaveChanges();
+    }
+
     protected async Task<List<TEntity>> RemoveManyByPatternAsync(Expression<Func<TEntity, bool>> pattern) {
       var entitiesToRemove = await Set.Where(pattern).ToListAsync();
       Set.RemoveRange(entitiesToRemove);
@@ -159,7 +157,6 @@ namespace ImportShopCore.Models {
 
     protected List<TEntity> RemoveManyByPattern(Expression<Func<TEntity, bool>> pattern) {
       var entitiesToRemove = Set.Where(pattern).ToList();
-      Console.WriteLine(entitiesToRemove.Count);
       Set.RemoveRange(entitiesToRemove);
       SaveChanges();
 
