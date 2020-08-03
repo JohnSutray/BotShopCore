@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace BotShopCore.Models.Entities {
-  public class OrderItem: IIdentifiable {
+  public class OrderItem : IIdentifiable {
     public int Id { get; set; }
 
     [Required] public int ProductId { get; set; }

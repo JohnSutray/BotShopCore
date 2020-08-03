@@ -2,9 +2,17 @@
 using BotShopCore.Enums;
 
 namespace BotShopCore.Attributes {
-  public class Service : Attribute {
+  [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+  public sealed class Service : Attribute {
     public ServiceScope Scope { get; set; }
+    public Type ResolveType { get; set; }
 
-    public Service(ServiceScope scope = ServiceScope.Transient) => Scope = scope;
+    public Service(
+      ServiceScope scope = ServiceScope.Transient,
+      Type resolveType = null
+    ) {
+      Scope = scope;
+      ResolveType = resolveType;
+    }
   }
 }

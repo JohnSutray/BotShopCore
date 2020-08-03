@@ -9,7 +9,7 @@ namespace BotShopCore.Models {
   public abstract class RepositoryService<TEntity> where TEntity : class, IIdentifiable {
     protected RepositoryService(ApplicationContext context) => Context = context;
 
-    protected ApplicationContext Context { get; }
+    protected readonly ApplicationContext Context;
     protected abstract DbSet<TEntity> Set { get; }
 
     protected async Task SaveChangesAsync() => await Context.SaveChangesAsync();
@@ -18,10 +18,14 @@ namespace BotShopCore.Models {
 
     protected TEntity ById(int id) => Set.FirstOrDefault(e => e.Id == id);
 
+    protected TEntity[] ByIdMany(IEnumerable<int> ids) => Set.Where(entity => ids.Contains(entity.Id)).ToArray();
+
     protected async Task<TEntity> ByIdAsync(int id) => await Set.FirstOrDefaultAsync(e => e.Id == id);
 
     protected async Task<TEntity> ByPatternAsync(Expression<Func<TEntity, bool>> pattern) =>
       await Set.SingleOrDefaultAsync(pattern);
+
+    protected TEntity ByPattern(Expression<Func<TEntity, bool>> pattern) => Set.SingleOrDefault(pattern);
 
     protected async Task<List<TEntity>> ByPatternManyAsync(Expression<Func<TEntity, bool>> pattern) =>
       await Set.Where(pattern).ToListAsync();
@@ -164,21 +168,24 @@ namespace BotShopCore.Models {
     }
 
     protected async Task<int> CountAsync(Expression<Func<TEntity, bool>> pattern) => await Set.CountAsync(pattern);
+
     protected int Count(Expression<Func<TEntity, bool>> pattern) => Set.Count(pattern);
 
     protected async Task UpdateByIdAsync(int id, Action<TEntity> updateCallback) {
       var entity = await ByIdAsync(id);
-
       updateCallback(entity);
-
       await SaveChangesAsync();
     }
 
     protected void UpdateById(int id, Action<TEntity> updateCallback) {
       var entity = ById(id);
-
       updateCallback(entity);
+      SaveChanges();
+    }
 
+    protected void UpdateByPattern(Expression<Func<TEntity, bool>> pattern, Action<TEntity> updateCallback) {
+      var entity = ByPattern(pattern);
+      updateCallback(entity);
       SaveChanges();
     }
   }

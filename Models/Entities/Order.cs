@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace BotShopCore.Models.Entities {
   public class Order : IIdentifiable {
@@ -11,10 +10,10 @@ namespace BotShopCore.Models.Entities {
 
     [Required] public int ChatId { get; set; }
     public Chat Chat { get; set; }
-    
+
     [Required] public int AccountId { get; set; }
     public Account Account { get; set; }
-    
+
     public ICollection<OrderItem> OrderItems { get; set; }
   }
 }
